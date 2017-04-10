@@ -75,7 +75,18 @@ class MainFrame extends JFrame {
 		displayAccountsButton.addActionListener(new DisplayHandler());
 		displayAllAccountsButton.addActionListener(new DisplayHandler());
 		depositButton.addActionListener(new DepositHandler());
-		withdrawButton.addActionListener(new WithdrawHandler());
+		withdrawButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+		
+			String name = nameField.getText();
+			String balance = balanceField.getText();
+			Account acc = myServer.getAccount(name);
+			if (acc != null && acc.withdraw(Float.parseFloat(balance))) {
+				JOptionPane.showMessageDialog(null, "Withdrawal successful");
+			} else {
+				JOptionPane.showMessageDialog(null, "Withdrawal unsuccessful");
+			}		
+		}});
 		saveButton.addActionListener(new SaveAccountsHandler());		
 		
 		Container pane = getContentPane();
@@ -172,18 +183,18 @@ class MainFrame extends JFrame {
 		}
 	}
 	// Complete a handler for deposit button
-	class WithdrawHandler implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String name = nameField.getText();
-			String balance = balanceField.getText();
-			Account acc = myServer.getAccount(name);
-			if (acc != null && acc.withdraw(Float.parseFloat(balance))) {
-				JOptionPane.showMessageDialog(null, "Withdrawal successful");
-			} else {
-				JOptionPane.showMessageDialog(null, "Withdrawal unsuccessful");
-			}		
-		}
-	}
+//	class WithdrawHandler implements ActionListener {
+//		public void actionPerformed(ActionEvent e) {
+//			String name = nameField.getText();
+//			String balance = balanceField.getText();
+//			Account acc = myServer.getAccount(name);
+//			if (acc != null && acc.withdraw(Float.parseFloat(balance))) {
+//				JOptionPane.showMessageDialog(null, "Withdrawal successful");
+//			} else {
+//				JOptionPane.showMessageDialog(null, "Withdrawal unsuccessful");
+//			}		
+//		}
+//	}
 	
 	//** Complete a handler for the Frame that terminates 
 	//** (System.exit(1)) on windowClosing event
