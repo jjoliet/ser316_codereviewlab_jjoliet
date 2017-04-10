@@ -11,6 +11,11 @@ import java.awt.Container;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+Class: MainFrame.java
+
+Description: This class creates the UI, as well as implementing the event handling as far as buttons are concerned.
+*/
 @SuppressWarnings("serial")
 class MainFrame extends JFrame {
 	AccountServer	myServer;
